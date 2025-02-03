@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main{
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.header{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: rgb(4, 4, 67);
+}

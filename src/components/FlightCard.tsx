@@ -1,6 +1,8 @@
-import React from 'react'
+interface FlightCardProp {
+  id: string
+}
 
-function FlightCard({id}) {
+const FlightCard:React.FC<FlightCardProp> = ({id}) => {
   return (
     <div>FlightCard {id}</div>
   )

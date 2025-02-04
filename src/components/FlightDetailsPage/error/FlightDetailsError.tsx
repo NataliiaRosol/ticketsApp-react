@@ -9,7 +9,7 @@ const FlightDetailsError : React.FC<FlightDetailsErrorProps> = ({errorMessage, o
       <div className='flightsError'>
         <p className='flightsErrorInfo'>Oops! Something went wrong: {errorMessage}</p>
       </div>
-      <button className='errorBtn' onClick={onRetry}>Retry</button>
+      <button className='retryBtn' onClick={onRetry}>Retry</button>
     </div>    
   )
 }

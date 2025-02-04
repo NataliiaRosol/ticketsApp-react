@@ -9,6 +9,7 @@ import { RootState } from "../../store/store";
 import axios from "axios";
 import FlightDetailsLoading from "./loading/FlightDetailsLoading";
 import FlightDetailsError from "./error/FlightDetailsError";
+import FlightTicket from "./FlightTicket";
 
 interface Flight {
   id: string;
@@ -76,7 +77,7 @@ function FlightDetailsPage() {
   console.log(flight);
 
   return (
-    <>
+    <div className="background">
       <Header />
       <main className="main">
         {loading && <FlightDetailsLoading />}
@@ -115,7 +116,9 @@ function FlightDetailsPage() {
             ))}
           </div>
 
-          {flight && (
+
+          {flight && <FlightTicket flight={flight} />}
+          {/* {flight && (
             <div className="flight-info">
               <h3 className="flight-info-header">
                 {flight.from} → {flight.to}
@@ -133,10 +136,10 @@ function FlightDetailsPage() {
                 Price per ticket: <span>{flight.price}$</span>{" "}
               </p>
             </div>
-          )}
+          )} */}
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

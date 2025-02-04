@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+// import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 import planeImg from "../../public/airplane.avif";
 
@@ -91,7 +91,6 @@ const FlightCard: React.FC<FlightCardProp> = ({ flight }) => {
         <CardActions className="card-actions">
           <Button size="small">Learn More</Button>
           <div className="card-btns">
-            <RemoveShoppingCartIcon color="error" />
             <AddShoppingCartIcon color="info" />
           </div>
         </CardActions>

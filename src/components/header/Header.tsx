@@ -1,5 +1,3 @@
-import "../../index.css";
-
 import { NavLink, useLocation } from "react-router";
 
 function Header() {

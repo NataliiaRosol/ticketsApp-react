@@ -1,16 +1,18 @@
+import { useNavigate } from "react-router";
+
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 import planeImg from "../../public/airplane.avif";
 
-import "../index.css";
-import { useNavigate } from "react-router";
+
 
 interface FlightCardProp {
   flight: Flight;
@@ -80,7 +82,7 @@ const FlightCard: React.FC<FlightCardProp> = ({ flight }) => {
             Total tickets: {flight.tickets.total}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.primary" }}>
-            Remaining remaining: {flight.tickets.remaining}
+            Remaining: {flight.tickets.remaining}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.primary" }}>
             Price: {flight.price}$

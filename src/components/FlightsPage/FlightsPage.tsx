@@ -1,15 +1,16 @@
-import "../index.css";
+import "../../index.css";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import FlightsPageLoading from "./loading/flightsPage/FlightsPageLoading";
-import FlightsPageError from "./errors/flightsPage/FlightsPageError";
-import FlightCard from "./FlightCard";
-// import { useNavigate } from "react-router";
-import Header from "./header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlights } from "../store/slices/flightsReduser.ts";
-import { RootState } from "../store/store.ts";
+
+import FlightsPageLoading from "./loading/FlightsPageLoading.tsx";
+import FlightsPageError from "./error/FlightsPageError.tsx";
+import FlightCard from "../FlightCard.tsx";
+import Header from "../header/Header.tsx";
+
+import { setFlights } from "../../store/slices/flightsReduser.ts";
+import { RootState } from "../../store/store.ts";
 
 interface Flight {
   id: string;
@@ -29,7 +30,6 @@ interface Flight {
 
 const FlightsPage: React.FC = () => {
   const dispatch = useDispatch();
-  // state: RootState
   const flights = useSelector((state: RootState) => state.flights.flights);
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -64,9 +64,8 @@ const FlightsPage: React.FC = () => {
 
   return (
     <>
+      <Header />
       <main className="main">
-        <Header />
-
         {loading && <FlightsPageLoading />}
         {error && (
           <FlightsPageError

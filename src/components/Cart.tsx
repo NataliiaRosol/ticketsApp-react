@@ -1,8 +1,19 @@
+import Header from "./header/Header"
 
 
 function Cart() {
   return (
-    <div>Cart</div>
+    <main className="main">
+        <Header />
+
+        {/* {loading && <FlightsPageLoading />}
+        {error && (
+          <FlightsPageError
+            errorMessage={errorMessage}
+            onRetry={fetchFlights}
+          />
+        )} */}
+        </main>
   )
 }
 

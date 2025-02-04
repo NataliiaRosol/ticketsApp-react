@@ -6,6 +6,7 @@ import FlightsPageLoading from "./loading/flightsPage/FlightsPageLoading";
 import FlightsPageError from "./errors/flightsPage/FlightsPageError";
 import FlightCard from "./FlightCard";
 import { useNavigate } from "react-router";
+import Header from "./header/Header";
 
 interface Flight {
   id: string;
@@ -29,11 +30,7 @@ const FlightsPage: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const navigate = useNavigate();
-
-  const handleClick = (id :string) => {
-    navigate(`/flights/${id}`);
-  }
+  
 
   // Get all flights
   async function fetchFlights() {
@@ -64,7 +61,7 @@ const FlightsPage: React.FC = () => {
   return (
     <>
       <main className="main">
-        <h1 className="header">Flights App</h1>
+        <Header />
 
         {loading && <FlightsPageLoading />}
         {error && (
@@ -78,10 +75,9 @@ const FlightsPage: React.FC = () => {
           {flights &&
             flights.length > 0 &&
             flights.map((flight) => (
-              <div key={flight.id}
-              onClick={() => handleClick(flight.id)} className="flights-inner">
+              
                 <FlightCard
-                  
+                key={flight.id}
                   id={flight.id}
                   airline={flight.airline}
                   from={flight.from}
@@ -93,7 +89,6 @@ const FlightsPage: React.FC = () => {
                   gate={flight.gate}
                   tickets={flight.tickets}
                 />
-              </div>
             ))}
         </div>
       </main>

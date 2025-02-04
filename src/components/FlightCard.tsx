@@ -10,6 +10,7 @@ import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import planeImg from "../../public/airplane.avif";
 
 import "../index.css";
+import { useNavigate } from "react-router";
 
 interface FlightCardProp {
   id: string;
@@ -41,56 +42,68 @@ const FlightCard: React.FC<FlightCardProp> = ({
 }) => {
   const { total, remaining } = tickets;
 
-  return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardContent>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Airline: {airline}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          ID: {id}
-        </Typography>
-      </CardContent>
-      <CardMedia sx={{ height: 140 }} image={planeImg} title={`Flight ${id}`} />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {from} → {to}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Departure time: {departureTime}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Arrival time: {arrivalTime}
-        </Typography>
+  const navigate = useNavigate();
 
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Terminal: {terminal}
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="body2"
-          sx={{ color: "text.secondary" }}
-        >
-          Gate: {gate}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.primary" }}>
-          Total tickets: {total}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.primary" }}>
-          Remaining remaining: {remaining}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.primary" }}>
-          Price: {price}$
-        </Typography>
-      </CardContent>
-      <CardActions className="card-actions">
-        <Button size="small">Learn More</Button>
-        <div className="card-btns">
-          <RemoveShoppingCartIcon color="error" />
-          <AddShoppingCartIcon color="info" />
-        </div>
-      </CardActions>
-    </Card>
+  const handleClick = (id: string) => {
+    navigate(`/flights/${id}`);
+  };
+
+  return (
+    <div onClick={() => handleClick(id)} className="flights-inner">
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Airline: {airline}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            ID: {id}
+          </Typography>
+        </CardContent>
+        <CardMedia
+          sx={{ height: 140 }}
+          image={planeImg}
+          title={`Flight ${id}`}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {from} → {to}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Departure time: {departureTime}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Arrival time: {arrivalTime}
+          </Typography>
+
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Terminal: {terminal}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="body2"
+            sx={{ color: "text.secondary" }}
+          >
+            Gate: {gate}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.primary" }}>
+            Total tickets: {total}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.primary" }}>
+            Remaining remaining: {remaining}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.primary" }}>
+            Price: {price}$
+          </Typography>
+        </CardContent>
+        <CardActions className="card-actions">
+          <Button size="small">Learn More</Button>
+          <div className="card-btns">
+            <RemoveShoppingCartIcon color="error" />
+            <AddShoppingCartIcon color="info" />
+          </div>
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 

@@ -8,7 +8,8 @@ import FlightCard from "./FlightCard";
 // import { useNavigate } from "react-router";
 import Header from "./header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlights } from "../store/slices/flightsReduser.js";
+import { setFlights } from "../store/slices/flightsReduser.ts";
+import { RootState } from "../store/store.ts";
 
 interface Flight {
   id: string;
@@ -29,9 +30,8 @@ interface Flight {
 const FlightsPage: React.FC = () => {
   const dispatch = useDispatch();
   // state: RootState
-  const flights = useSelector((state) => state.flights.flights);
+  const flights = useSelector((state: RootState) => state.flights.flights);
 
-  // const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");

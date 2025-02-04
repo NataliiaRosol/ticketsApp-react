@@ -1,3 +1,5 @@
+// import styles from '../Cart/FlightTicket.module.css'
+
 interface Flight {
   airline: string;
   from: string;

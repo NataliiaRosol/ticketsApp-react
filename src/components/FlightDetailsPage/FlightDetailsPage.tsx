@@ -8,14 +8,9 @@ import { addTicket, removeTicket } from "../../store/slices/ticketsReducer";
 import { RootState } from "../../store/store";
 import axios from "axios";
 
-// Тип для місця
-interface Seat {
-  id: string;
-  occupied: boolean;
-}
 
-// Тип для сітки місць
-type SeatsGrid = Seat[][];
+
+
 
 interface Flight {
   id: string;
@@ -33,21 +28,14 @@ interface Flight {
   };
 }
 
-const generateSeats = (rows: number, cols: number): SeatsGrid => {
-  return Array.from({ length: rows }, (_, rowIndex) =>
-    Array.from({ length: cols }, (_, colIndex) => ({
-      id: `${rowIndex}${colIndex}`,
-      occupied: Math.random() < 0.3, // 30% шанс зайнятого місця
-    }))
-  );
-};
+
 
 function FlightDetailsPage() {
-  const [seats, setSeats] = useState<SeatsGrid>(generateSeats(10, 6));
   const [flight, setFlight] = useState<Flight | null>(null);
   const { id } = useParams<{ id: string }>();
 
   const dispatch = useDispatch();
+  const seats = useSelector((state: RootState) => state.tickets.seats);
   const selectedSeats = useSelector(
     (state: RootState) => state.tickets.selectedSeats
   );

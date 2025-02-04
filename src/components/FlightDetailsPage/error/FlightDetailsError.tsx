@@ -1,11 +1,9 @@
-import '../../styles/error.css'
-
-interface FlightsPageErrorProps {
+interface FlightDetailsErrorProps {
   errorMessage: string;
   onRetry: () => void;
 }
 
-const FlightsPageError : React.FC<FlightsPageErrorProps> = ({errorMessage, onRetry}) => {
+const FlightDetailsError : React.FC<FlightDetailsErrorProps> = ({errorMessage, onRetry}) => {
   return (
     <div className='wrapper'>
       <div className='flightsError'>
@@ -16,4 +14,4 @@ const FlightsPageError : React.FC<FlightsPageErrorProps> = ({errorMessage, onRet
   )
 }
 
-export default FlightsPageError
+export default FlightDetailsError

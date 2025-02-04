@@ -7,10 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTicket, removeTicket } from "../../store/slices/ticketsReducer";
 import { RootState } from "../../store/store";
 import axios from "axios";
-
-
-
-
+import FlightDetailsLoading from "./loading/FlightDetailsLoading";
+import FlightDetailsError from "./error/FlightDetailsError";
 
 interface Flight {
   id: string;
@@ -28,10 +26,11 @@ interface Flight {
   };
 }
 
-
-
 function FlightDetailsPage() {
   const [flight, setFlight] = useState<Flight | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { id } = useParams<{ id: string }>();
 
   const dispatch = useDispatch();
@@ -52,11 +51,22 @@ function FlightDetailsPage() {
   };
 
   const fetchFlightDetails = async (): Promise<void> => {
-    const res = await axios.get<Flight>(
-      `https://679d13f487618946e6544ccc.mockapi.io/testove/v1/flights/${id}`
-    );
-    const data = res.data;
-    setFlight(data);
+    try {
+      setError(false);
+      setLoading(true);
+      const res = await axios.get<Flight>(
+        `https://679d13f487618946e6544ccc.mockapi.io/testove/v1/flights/${id}`
+      );
+      const data = res.data;
+      setFlight(data);
+    } catch (error) {
+      setLoading(true);
+      console.error("Помилка завантаження рейсів:", error);
+      setError(true);
+      setErrorMessage(error instanceof Error ? error.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -69,6 +79,13 @@ function FlightDetailsPage() {
     <>
       <Header />
       <main className="main">
+        {loading && <FlightDetailsLoading />}
+        {error && (
+          <FlightDetailsError
+            errorMessage={errorMessage}
+            onRetry={fetchFlightDetails}
+          />
+        )}
         <div className="seats">
           <div className="seats-inner">
             <h2 className="seats-header">Select seats:</h2>

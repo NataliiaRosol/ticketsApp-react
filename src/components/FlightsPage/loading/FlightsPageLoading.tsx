@@ -1,10 +1,10 @@
 import { CircularProgress } from '@mui/material'
-import styles from './FlightsPage.module.css'
+import  '../../styles/loading.css'
 
 function FlightsPageLoading() {
   return (
-    <div className={styles.flightsLoading}>
-      <div className={styles.flightsLoadingInfo}>Flights page loading, please wait...</div>
+    <div className='flightsLoading'>
+      <div className='flightsLoadingInfo'>Flights page loading, please wait...</div>
       <CircularProgress />
     </div>
     

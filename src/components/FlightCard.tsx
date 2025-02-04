@@ -13,6 +13,10 @@ import "../index.css";
 import { useNavigate } from "react-router";
 
 interface FlightCardProp {
+  flight: Flight;
+}
+
+interface Flight {
   id: string;
   airline: string;
   from: string;
@@ -28,20 +32,7 @@ interface FlightCardProp {
   };
 }
 
-const FlightCard: React.FC<FlightCardProp> = ({
-  id,
-  airline,
-  from,
-  to,
-  departureTime,
-  arrivalTime,
-  price,
-  terminal,
-  gate,
-  tickets,
-}) => {
-  const { total, remaining } = tickets;
-
+const FlightCard: React.FC<FlightCardProp> = ({ flight }) => {
   const navigate = useNavigate();
 
   const handleClick = (id: string) => {
@@ -49,50 +40,50 @@ const FlightCard: React.FC<FlightCardProp> = ({
   };
 
   return (
-    <div onClick={() => handleClick(id)} className="flights-inner">
+    <div onClick={() => handleClick(flight.id)} className="flights-inner">
       <Card sx={{ maxWidth: 345 }}>
         <CardContent>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Airline: {airline}
+            Airline: {flight.airline}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            ID: {id}
+            ID: {flight.id}
           </Typography>
         </CardContent>
         <CardMedia
           sx={{ height: 140 }}
           image={planeImg}
-          title={`Flight ${id}`}
+          title={`Flight ${flight.id}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {from} → {to}
+            {flight.from} → {flight.to}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Departure time: {departureTime}
+            Departure time: {flight.departureTime}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Arrival time: {arrivalTime}
+            Arrival time: {flight.arrivalTime}
           </Typography>
 
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Terminal: {terminal}
+            Terminal: {flight.terminal}
           </Typography>
           <Typography
             gutterBottom
             variant="body2"
             sx={{ color: "text.secondary" }}
           >
-            Gate: {gate}
+            Gate: {flight.gate}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.primary" }}>
-            Total tickets: {total}
+            Total tickets: {flight.tickets.total}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.primary" }}>
-            Remaining remaining: {remaining}
+            Remaining remaining: {flight.tickets.remaining}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.primary" }}>
-            Price: {price}$
+            Price: {flight.price}$
           </Typography>
         </CardContent>
         <CardActions className="card-actions">

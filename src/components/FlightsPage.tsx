@@ -5,8 +5,10 @@ import React, { useEffect, useState } from "react";
 import FlightsPageLoading from "./loading/flightsPage/FlightsPageLoading";
 import FlightsPageError from "./errors/flightsPage/FlightsPageError";
 import FlightCard from "./FlightCard";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import Header from "./header/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { setFlights } from "../store/slices/flightsReduser.js";
 
 interface Flight {
   id: string;
@@ -25,12 +27,14 @@ interface Flight {
 }
 
 const FlightsPage: React.FC = () => {
-  const [flights, setFlights] = useState<Flight[]>([]);
+  const dispatch = useDispatch();
+  // state: RootState
+  const flights = useSelector((state) => state.flights.flights);
+
+  // const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  
 
   // Get all flights
   async function fetchFlights() {
@@ -41,7 +45,7 @@ const FlightsPage: React.FC = () => {
         "https://679d13f487618946e6544ccc.mockapi.io/testove/v1/flights"
       );
       const data = (await res).data;
-      setFlights(data);
+      dispatch(setFlights(data)); // Оновлюємо Redux Store
     } catch (error) {
       setLoading(true);
       console.error("Помилка завантаження рейсів:", error);
@@ -74,21 +78,8 @@ const FlightsPage: React.FC = () => {
         <div className="flights">
           {flights &&
             flights.length > 0 &&
-            flights.map((flight) => (
-              
-                <FlightCard
-                key={flight.id}
-                  id={flight.id}
-                  airline={flight.airline}
-                  from={flight.from}
-                  to={flight.to}
-                  departureTime={flight.departureTime}
-                  arrivalTime={flight.arrivalTime}
-                  price={flight.price}
-                  terminal={flight.terminal}
-                  gate={flight.gate}
-                  tickets={flight.tickets}
-                />
+            flights.map((flight: Flight) => (
+              <FlightCard key={flight.id} flight={flight} />
             ))}
         </div>
       </main>

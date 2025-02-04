@@ -1,10 +1,11 @@
-import '../index.css'
+import "../index.css";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FlightsPageLoading from "./loading/flightsPage/FlightsPageLoading";
 import FlightsPageError from "./errors/flightsPage/FlightsPageError";
 import FlightCard from "./FlightCard";
+import { useNavigate } from "react-router";
 
 interface Flight {
   id: string;
@@ -26,7 +27,13 @@ const FlightsPage: React.FC = () => {
   const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('')
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const handleClick = (id :string) => {
+    navigate(`/flights/${id}`);
+  }
 
   // Get all flights
   async function fetchFlights() {
@@ -42,7 +49,7 @@ const FlightsPage: React.FC = () => {
       setLoading(true);
       console.error("Помилка завантаження рейсів:", error);
       setError(true);
-      setErrorMessage(error instanceof Error ? error.message : "Unknown error")
+      setErrorMessage(error instanceof Error ? error.message : "Unknown error");
     } finally {
       setLoading(false);
     }
@@ -56,20 +63,42 @@ const FlightsPage: React.FC = () => {
 
   return (
     <>
-      <main className='main'>
+      <main className="main">
         <h1 className="header">Flights App</h1>
 
         {loading && <FlightsPageLoading />}
-        {error && <FlightsPageError errorMessage={errorMessage} onRetry={fetchFlights} />}
+        {error && (
+          <FlightsPageError
+            errorMessage={errorMessage}
+            onRetry={fetchFlights}
+          />
+        )}
 
-        {flights &&
-          flights.length > 0 &&
-          flights.map((flight) => (
-            <FlightCard key={flight.id} id={flight.id} />
-          ))}
+        <div className="flights">
+          {flights &&
+            flights.length > 0 &&
+            flights.map((flight) => (
+              <div key={flight.id}
+              onClick={() => handleClick(flight.id)} className="flights-inner">
+                <FlightCard
+                  
+                  id={flight.id}
+                  airline={flight.airline}
+                  from={flight.from}
+                  to={flight.to}
+                  departureTime={flight.departureTime}
+                  arrivalTime={flight.arrivalTime}
+                  price={flight.price}
+                  terminal={flight.terminal}
+                  gate={flight.gate}
+                  tickets={flight.tickets}
+                />
+              </div>
+            ))}
+        </div>
       </main>
     </>
   );
-}
+};
 
 export default FlightsPage;

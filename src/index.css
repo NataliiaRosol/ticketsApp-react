@@ -5,12 +5,54 @@
 }
 .main{
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 30px auto 50px;
   padding: 0 20px;
 }
 .header{
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center;
   color: rgb(4, 4, 67);
+}
+.flights{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 30px;
+  justify-items: center;
+}
+.flights-inner{
+  cursor: pointer;
+  transition: all 0.8s ease;
+}
+.flights-inner:hover{
+  
+  transform: scale(105%);
+  
+}
+.card-actions{
+  justify-content: space-between;
+}
+.card-btns{
+  display: flex;
+  gap: 10px;
+}
+
+
+
+
+
+@media (max-width: 1485px) {
+  .flights{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .flights{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 585px) {
+  .flights{
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

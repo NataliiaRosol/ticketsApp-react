@@ -73,7 +73,7 @@ const FlightCard: React.FC<FlightCardProp> = ({ flight }) => {
           </Typography>
         </CardContent>
         <CardActions className="card-actions">
-          <Button size="small">Learn More</Button>
+          <Button size="small">View More Details</Button>
           <div className="card-btns">
             <AddShoppingCartIcon color="info" />
           </div>

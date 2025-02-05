@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Seat, Ticket } from './../../utils/types'
+import { Seat, Ticket } from "./../../utils/types";
 
 // For adding and removing tickets from cart
 
 // Тип для сітки місць
 type SeatsGrid = Seat[][];
-
 
 // Структура збереження у Redux
 interface TicketsState {
@@ -14,19 +13,19 @@ interface TicketsState {
   selectedTickets: Ticket[];
 }
 
-const initialState:TicketsState = {
+const initialState: TicketsState = {
   seats: generateSeats(10, 6),
   selectedTickets: loadTicketsFromLocalStorage(),
-}
+};
 
-function generateSeats (rows: number, cols: number): SeatsGrid {
+function generateSeats(rows: number, cols: number): SeatsGrid {
   return Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: cols }, (_, colIndex) => ({
       id: `${rowIndex}${colIndex}`,
       occupied: Math.random() < 0.3, // 30% шанс зайнятого місця
     }))
   );
-};
+}
 
 function loadTicketsFromLocalStorage() {
   try {
@@ -36,7 +35,7 @@ function loadTicketsFromLocalStorage() {
     console.error("Помилка завантаження квитків з localStorage:", error);
     return [];
   }
-};
+}
 
 const ticketsReducer = createSlice({
   name: "tickets",
@@ -56,7 +55,11 @@ const ticketsReducer = createSlice({
     },
     removeTicket: (state, action) => {
       state.selectedTickets = state.selectedTickets.filter(
-        (ticket) => !(ticket.seat.id === action.payload.seatId && ticket.flight.id === action.payload.flightId)
+        (ticket) =>
+          !(
+            ticket.seat.id === action.payload.seatId &&
+            ticket.flight.id === action.payload.flightId
+          )
       );
     },
   },

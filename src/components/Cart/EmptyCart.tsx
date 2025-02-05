@@ -4,10 +4,12 @@ import { LiaPlaneDepartureSolid } from "react-icons/lia";
 function EmptyCart() {
   return (
     <div className="wrapper">
-        <p className="">Your cart is empty</p>
-      
+      <p className="">Your cart is empty</p>
+
       <Link to={"/"}>
-        <button className="emptyCart-btn">Go Home <LiaPlaneDepartureSolid /></button>
+        <button className="emptyCart-btn">
+          Go Home <LiaPlaneDepartureSolid />
+        </button>
       </Link>
     </div>
   );

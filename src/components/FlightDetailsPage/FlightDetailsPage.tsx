@@ -11,21 +11,8 @@ import FlightDetailsLoading from "./loading/FlightDetailsLoading";
 import FlightDetailsError from "./error/FlightDetailsError";
 import FlightTicket from "./FlightTicket";
 
-interface Flight {
-  id: string;
-  airline: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  terminal: string;
-  gate: string;
-  tickets: {
-    total: number;
-    remaining: number;
-  };
-}
+import { Flight, Ticket } from './../../utils/types'
+
 
 function FlightDetailsPage() {
   const [flight, setFlight] = useState<Flight | null>(null);
@@ -36,18 +23,27 @@ function FlightDetailsPage() {
 
   const dispatch = useDispatch();
   const seats = useSelector((state: RootState) => state.tickets.seats);
-  const selectedSeats = useSelector(
-    (state: RootState) => state.tickets.selectedSeats
+  const selectedTickets = useSelector(
+    (state: RootState) => state.tickets.selectedTickets
   );
 
   const handleSelectSeat = (rowIndex: number, colIndex: number): void => {
+    if (!flight) return; // Якщо ще немає даних про рейс, не даємо обрати місце
+
     const seat = seats[rowIndex][colIndex];
     if (seat.occupied) return;
 
-    if (selectedSeats.includes(seat.id)) {
-      dispatch(removeTicket(seat.id));
+    const ticket: Ticket = { flight, seat };
+
+    // Перевіряємо, чи це місце для цього рейсу вже вибране
+    const alreadySelected = selectedTickets.some(
+      (t) => t.seat.id === seat.id && t.flight.id === flight.id
+    );
+
+    if (alreadySelected) {
+      dispatch(removeTicket({ flightId: flight.id, seatId: seat.id }));
     } else {
-      dispatch(addTicket(seat.id));
+      dispatch(addTicket(ticket));
     }
   };
 
@@ -97,46 +93,32 @@ function FlightDetailsPage() {
             </div>
             {seats.map((row, rowIndex) => (
               <div key={rowIndex} className="seat-row">
-                {row.map((seat, colIndex) => (
-                  <div
-                    key={seat.id}
-                    className={`seat ${
-                      seat.occupied
-                        ? "occupied"
-                        : selectedSeats.includes(seat.id)
-                        ? "selected"
-                        : "free"
-                    }`}
-                    onClick={() => handleSelectSeat(rowIndex, colIndex)}
-                  >
-                    <TbArmchair />
-                  </div>
-                ))}
+                {row.map((seat, colIndex) => {
+                  const isSelected = selectedTickets.some(
+                    (t) => t.seat.id === seat.id && t.flight.id === flight?.id
+                  );
+
+                  return (
+                    <div
+                      key={seat.id}
+                      className={`seat ${
+                        seat.occupied
+                          ? "occupied"
+                          : isSelected
+                          ? "selected"
+                          : "free"
+                      }`}
+                      onClick={() => handleSelectSeat(rowIndex, colIndex)}
+                    >
+                      <TbArmchair />
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
 
-
           {flight && <FlightTicket flight={flight} />}
-          {/* {flight && (
-            <div className="flight-info">
-              <h3 className="flight-info-header">
-                {flight.from} → {flight.to}
-              </h3>
-              <p>Airline: {flight.airline}</p>
-              <p>Departure time: {flight.departureTime}</p>
-              <p>Arrival time: {flight.arrivalTime}</p>
-              <p>Terminal: {flight.terminal}</p>
-              <p>Gate: {flight.gate}</p>
-              <p className="flight-info-tickets">
-                Total tickets: {flight.tickets?.total}
-              </p>
-              <p>Remaining: {flight.tickets?.remaining}</p>
-              <p className="flight-info-price">
-                Price per ticket: <span>{flight.price}$</span>{" "}
-              </p>
-            </div>
-          )} */}
         </div>
       </main>
     </div>

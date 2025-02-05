@@ -12,26 +12,10 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import planeImg from "../../public/airplane.avif";
 
-
+import { Flight } from './../utils/types'
 
 interface FlightCardProp {
   flight: Flight;
-}
-
-interface Flight {
-  id: string;
-  airline: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  terminal: string;
-  gate: string;
-  tickets: {
-    total: number;
-    remaining: number;
-  };
 }
 
 const FlightCard: React.FC<FlightCardProp> = ({ flight }) => {

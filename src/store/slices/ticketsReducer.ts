@@ -1,19 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Тип для місця
-interface Seat {
-  id: string;
-  occupied: boolean;
-}
+import { Seat, Ticket } from './../../utils/types'
+
 
 // Тип для сітки місць
 type SeatsGrid = Seat[][];
 
 
-
+// Структура збереження у Redux
 interface TicketsState {
   seats: SeatsGrid;
-  selectedSeats: string[];
+  selectedTickets: Ticket[];
 }
 
 const generateSeats = (rows: number, cols: number): SeatsGrid => {
@@ -27,7 +24,7 @@ const generateSeats = (rows: number, cols: number): SeatsGrid => {
 
 const initialState:TicketsState = {
   seats: generateSeats(10, 6),
-  selectedSeats: [],
+  selectedTickets: [],
 }
 
 const ticketsReducer = createSlice({
@@ -35,10 +32,21 @@ const ticketsReducer = createSlice({
   initialState,
   reducers: {
     addTicket: (state, action) => {
-      state.selectedSeats.push(action.payload);
+      const { flight, seat } = action.payload;
+
+      // Перевіряємо, чи цей квиток вже є у списку
+      const alreadySelected = state.selectedTickets.some(
+        (t) => t.seat.id === seat.id && t.flight.id === flight.id
+      );
+
+      if (!alreadySelected) {
+        state.selectedTickets.push(action.payload);
+      }
     },
     removeTicket: (state, action) => {
-      state.selectedSeats = state.selectedSeats.filter(id => id !== action.payload);
+      state.selectedTickets = state.selectedTickets.filter(
+        (ticket) => !(ticket.seat.id === action.payload.seatId && ticket.flight.id === action.payload.flightId)
+      );
     },
   },
 });

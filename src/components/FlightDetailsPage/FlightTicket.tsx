@@ -1,19 +1,7 @@
 // import styles from '../Cart/FlightTicket.module.css'
 
-interface Flight {
-  airline: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  terminal: string;
-  gate: string;
-  tickets: {
-    total: number;
-    remaining: number;
-  };
-}
+import { Flight } from './../../utils/types'
+
 
 const FlightTicket: React.FC<{ flight: Flight }> = ({ flight }) => {
   return (

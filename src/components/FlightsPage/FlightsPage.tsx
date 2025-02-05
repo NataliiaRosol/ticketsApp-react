@@ -12,21 +12,7 @@ import Header from "../header/Header.tsx";
 import { setFlights } from "../../store/slices/flightsReduser.ts";
 import { RootState } from "../../store/store.ts";
 
-interface Flight {
-  id: string;
-  airline: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  terminal: string;
-  gate: string;
-  tickets: {
-    total: number;
-    remaining: number;
-  };
-}
+import { Flight } from './../../utils/types'
 
 const FlightsPage: React.FC = () => {
   const dispatch = useDispatch();

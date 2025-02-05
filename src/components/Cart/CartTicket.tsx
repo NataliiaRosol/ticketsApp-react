@@ -1,19 +1,9 @@
-import styles from './FlightTicket.module.css'
+import { useDispatch } from 'react-redux';
+import styles from './CartTicket.module.css'
+import { MdDeleteSweep } from "react-icons/md";
+import { removeTicket } from '../../store/slices/ticketsReducer';
 
-interface Flight {
-  airline: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  price: number;
-  terminal: string;
-  gate: string;
-  tickets: {
-    total: number;
-    remaining: number;
-  };
-}
+import { Flight } from './../../utils/types'
 
 interface CartTicketProps {
   flight: Flight;
@@ -21,6 +11,14 @@ interface CartTicketProps {
 }
 
 const CartTicket: React.FC<CartTicketProps> = ({ flight, selectedSeat }) => {
+  const dispatch = useDispatch();
+
+  const handleRemoveTicket = () => {
+    if (selectedSeat) {
+      dispatch(removeTicket({ flightId: flight.id, seatId: selectedSeat }));
+    }
+  };
+
   return (
     <div className={styles.ticket}>
       <div className={styles.ticketSidebar}>
@@ -29,6 +27,7 @@ const CartTicket: React.FC<CartTicketProps> = ({ flight, selectedSeat }) => {
       <div className={styles.ticketBody}>
         <div className={styles.ticketHeader}>
           <span className={styles.ticketRoute}>{flight.from} ✈ {flight.to}</span>
+          <MdDeleteSweep style={{ width: "25px", height: "25px" }} onClick={handleRemoveTicket} />          
         </div>
         <div className={styles.ticketInfo}>
           <p>Departure: <strong>{new Date(flight.departureTime).toLocaleTimeString()}</strong></p>

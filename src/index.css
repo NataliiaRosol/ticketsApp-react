@@ -96,6 +96,22 @@ a {
   margin: 30px auto 50px;
   padding: 0 20px;
 }
+/* Sorting */
+.sorting-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.sorting-select{
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+}
+
 .flights {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

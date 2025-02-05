@@ -22,6 +22,8 @@ const FlightsPage: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const [sortOrder, setSortOrder] = useState<"low-to-high" | "high-to-low" | "not-selected">("not-selected"); // Стан для сортування
+
   // Get all flights
   async function fetchFlights() {
     try {
@@ -46,7 +48,22 @@ const FlightsPage: React.FC = () => {
     fetchFlights();
   }, []);
 
-  console.log(flights);
+  // Обробка сортування
+  const handlePriceSorting = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (value === "low-to-high") setSortOrder("low-to-high");
+    else if (value === "high-to-low") setSortOrder("high-to-low");
+    else setSortOrder("not-selected");
+  };
+
+  // Фільтрація за ціною
+  const sortedFlights: Flight[] = [...flights].sort((a: Flight, b: Flight) => {
+    if (sortOrder === "low-to-high") return a.price - b.price;
+    if (sortOrder === "high-to-low") return b.price - a.price;
+    return 0;
+  });
+
+  // console.log(flights);
 
   return (
     <>
@@ -60,10 +77,20 @@ const FlightsPage: React.FC = () => {
           />
         )}
 
+        {/* Випадаючий список сортування */}
+        <div className="sorting-container">
+          <p className="sorting-label">Price:</p>
+          <select onChange={handlePriceSorting} className="sorting-select">
+            <option value="not-selected">Not selected</option>
+            <option value="low-to-high">Low to high</option>
+            <option value="high-to-low">High to low</option>
+          </select>
+        </div>
+
         <div className="flights">
-          {flights &&
-            flights.length > 0 &&
-            flights.map((flight: Flight) => (
+          {sortedFlights &&
+            sortedFlights.length > 0 &&
+            sortedFlights.map((flight: Flight) => (
               <FlightCard key={flight.id} flight={flight} />
             ))}
         </div>

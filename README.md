@@ -14,22 +14,18 @@ The app is deployed on [Vercel](https://tickets-app-react.vercel.app/). You can 
 
 ### 1. Clone the repository from GitHub:
 Open your terminal and run the following command:
-```bash
-git clone https://github.com/your-username/flight-search-ticket-booking.git
+`git clone https://github.com/your-username/flight-search-ticket-booking.git`
 
 ### 2. Navigate to the project folder:
-```bash
-cd flight-search-ticket-booking
+`cd flight-search-ticket-booking`
 
 ### 3. Install all dependencies:
 Run the following command to install the required dependencies:
-```bash
-npm install
+`npm install`
 
 ### 4. Start the development server:
 Once the dependencies are installed, you can run the application locally using the following command:
-```bash
-npm start
+`npm start`
 
 This will start the app in development mode and open it in your browser at http://localhost:3000.
 
@@ -38,24 +34,19 @@ This will start the app in development mode and open it in your browser at http:
 The following libraries are used in the project:
 
 - react-icons: A library for including icons in React components.
-```bash
-npm install react-icons --save
+`npm install react-icons --save`
 
 - Material UI: A popular React UI framework for designing user interfaces.
-```bash
-npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+`npm install @mui/icons-material @mui/material @emotion/styled @emotion/react`
 
 - Redux Toolkit: A set of tools for efficient Redux state management.
-```bash
-npm install @reduxjs/toolkit react-redux
+`npm install @reduxjs/toolkit react-redux`
 
 - React Router: A library for handling navigation in React applications.
-```bash
-npm i react-router
+`npm i react-router`
 
 - Axios: A library for making HTTP requests.
-```bash
-npm install axios
+`npm install axios`
 
 
 ## Project Structure:

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Get selected flight
 const initialState = {
   flights: [],
   selectedFlightId: null,

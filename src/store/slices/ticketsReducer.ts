@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { Seat, Ticket } from './../../utils/types'
 
+// For adding and removing tickets from cart
 
 // Тип для сітки місць
 type SeatsGrid = Seat[][];
@@ -13,7 +14,12 @@ interface TicketsState {
   selectedTickets: Ticket[];
 }
 
-const generateSeats = (rows: number, cols: number): SeatsGrid => {
+const initialState:TicketsState = {
+  seats: generateSeats(10, 6),
+  selectedTickets: loadTicketsFromLocalStorage(),
+}
+
+function generateSeats (rows: number, cols: number): SeatsGrid {
   return Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: cols }, (_, colIndex) => ({
       id: `${rowIndex}${colIndex}`,
@@ -22,10 +28,15 @@ const generateSeats = (rows: number, cols: number): SeatsGrid => {
   );
 };
 
-const initialState:TicketsState = {
-  seats: generateSeats(10, 6),
-  selectedTickets: [],
-}
+function loadTicketsFromLocalStorage() {
+  try {
+    const savedTickets = localStorage.getItem("cart");
+    return savedTickets ? JSON.parse(savedTickets) : [];
+  } catch (error) {
+    console.error("Помилка завантаження квитків з localStorage:", error);
+    return [];
+  }
+};
 
 const ticketsReducer = createSlice({
   name: "tickets",

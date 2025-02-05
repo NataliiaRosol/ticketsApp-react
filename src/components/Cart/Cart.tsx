@@ -15,10 +15,13 @@ function Cart() {
       <Header />
       <main className="main">
         {selectedTickets.length === 0 && <EmptyCart />}
-
+        <div className="tickets">
         {selectedTickets.map(({ flight, seat }, index) => (
-          <CartTicket key={index} flight={flight} selectedSeat={seat.id} />
+          
+            <CartTicket key={index} flight={flight} selectedSeat={seat.id} />
+         
         ))}
+         </div>
       </main>
     </>
   );

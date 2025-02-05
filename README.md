@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# Flight Search and Ticket Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a flight search and ticket booking web application where users can view flight details, sort flights by price, and add tickets to their cart. The app is built using **React**, **Redux**, **TypeScript**, **Axios**, and **Material UI**.
 
-Currently, two official plugins are available:
+## Features:
+- **FlightsPage**: Displays a list of available flights with basic details.
+- **FlightDetailsPage**: Shows detailed information about a specific flight along with seat availability (randomly generated). Users can select an available seat and add it to their cart.
+- **Cart**: Allows users to view selected tickets, check the total price, and the number of tickets in the cart.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo:
+The app is deployed on [Vercel](https://tickets-app-react.vercel.app/). You can visit the live demo to explore the application.
 
-## Expanding the ESLint configuration
+## Setup and Installation:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1. Clone the repository from GitHub:
+Open your terminal and run the following command:
+```bash
+git clone https://github.com/your-username/flight-search-ticket-booking.git
 
-- Configure the top-level `parserOptions` property like this:
+### 2. Navigate to the project folder:
+```bash
+cd flight-search-ticket-booking
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 3. Install all dependencies:
+Run the following command to install the required dependencies:
+```bash
+npm install
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 4. Start the development server:
+Once the dependencies are installed, you can run the application locally using the following command:
+```bash
+npm start
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+This will start the app in development mode and open it in your browser at http://localhost:3000.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+
+## Dependencies:
+The following libraries are used in the project:
+
+- react-icons: A library for including icons in React components.
+```bash
+npm install react-icons --save
+
+- Material UI: A popular React UI framework for designing user interfaces.
+```bash
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+
+- Redux Toolkit: A set of tools for efficient Redux state management.
+```bash
+npm install @reduxjs/toolkit react-redux
+
+- React Router: A library for handling navigation in React applications.
+```bash
+npm i react-router
+
+- Axios: A library for making HTTP requests.
+```bash
+npm install axios
+
+
+## Project Structure:
+**FlightsPage**: A page that displays flight information in card format and allows sorting flights by price.
+**FlightDetailsPage**: A page that shows detailed flight information and a seat map with randomly generated available and occupied seats. Users can add an available seat to the cart.
+**Cart**: A page that allows users to see the tickets added to the cart, along with the total price and quantity.
+
+## How it Works:
+- FlightsPage allows users to view flight details. Clicking on a flight card takes users to the FlightDetailsPage where they can select available seats and add them to the Cart.
+- In the FlightDetailsPage, available and occupied seats are randomly generated, and users can click on available seats to add them to their cart.
+- On the Cart page, users can see the total number of tickets and the total cost of their selected tickets.

@@ -4,10 +4,10 @@ import { Seat, Ticket } from "./../../utils/types";
 
 // For adding and removing tickets from cart
 
-// Тип для сітки місць
+// Type for seat grid
 type SeatsGrid = Seat[][];
 
-// Структура збереження у Redux
+// Data structura in Redux
 interface TicketsState {
   seats: SeatsGrid;
   selectedTickets: Ticket[];
@@ -22,7 +22,7 @@ function generateSeats(rows: number, cols: number): SeatsGrid {
   return Array.from({ length: rows }, (_, rowIndex) =>
     Array.from({ length: cols }, (_, colIndex) => ({
       id: `${rowIndex}${colIndex}`,
-      occupied: Math.random() < 0.3, // 30% шанс зайнятого місця
+      occupied: Math.random() < 0.3, // 30% occupated seat chance
     }))
   );
 }
@@ -44,7 +44,7 @@ const ticketsReducer = createSlice({
     addTicket: (state, action) => {
       const { flight, seat } = action.payload;
 
-      // Перевіряємо, чи цей квиток вже є у списку
+      // Check this ticket already in a cart
       const alreadySelected = state.selectedTickets.some(
         (t) => t.seat.id === seat.id && t.flight.id === flight.id
       );

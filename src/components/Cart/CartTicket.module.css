@@ -1,7 +1,6 @@
 .ticket {
   display: flex;
   max-width: 600px;
-
   height: 350px;
   background: #ffffff;
   border-radius: 12px;

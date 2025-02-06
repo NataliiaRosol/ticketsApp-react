@@ -1,5 +1,4 @@
-
-// Тип для рейсу
+// Flifht type
 export interface Flight {
   id: string;
   airline: string;
@@ -16,13 +15,13 @@ export interface Flight {
   };
 }
 
-//Тип для місця
+// Seat type
 export interface Seat {
   id: string;
   occupied: boolean;
 }
 
-// Тип для квитка
+// Ticket type
 export interface Ticket {
   flight: Flight;
   seat: Seat;

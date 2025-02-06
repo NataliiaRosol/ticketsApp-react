@@ -3,12 +3,12 @@ import flightsReduser from "./slices/flightsReduser";
 import ticketsReducer from "./slices/ticketsReducer";
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
-  const result = next(action); // Викликаємо наступний middleware / редуктор
+  const result = next(action); // Call next middleware / reductor
 
-  // Отримуємо оновлений стан
+  // Get updated state
   const state = store.getState();
 
-  // Зберігаємо вибрані квитки у localStorage
+  // Store selected tickets in localStorage
   localStorage.setItem("cart", JSON.stringify(state.tickets.selectedTickets));
 
   return result;
@@ -18,7 +18,8 @@ const store = configureStore({
   reducer: {
     flights: flightsReduser,
     tickets: ticketsReducer,
-  },middleware: (getDefaultMiddleware) =>
+  },
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware),
 });
 

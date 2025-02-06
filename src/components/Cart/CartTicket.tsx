@@ -13,6 +13,7 @@ interface CartTicketProps {
 const CartTicket: React.FC<CartTicketProps> = ({ flight, selectedSeat }) => {
   const dispatch = useDispatch();
 
+  // Handle ticket removing
   const handleRemoveTicket = () => {
     if (selectedSeat) {
       dispatch(removeTicket({ flightId: flight.id, seatId: selectedSeat }));

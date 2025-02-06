@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
-import FlightsPage from "./components/FlightsPage/FlightsPage"
-import Cart from "./components/Cart/Cart"
-import FlightDetailsPage from "./components/FlightDetailsPage/FlightDetailsPage"
+import FlightsPage from "./pages/FlightsPage"
+import Cart from "./pages/Cart"
+import FlightDetailsPage from "./pages/FlightDetailsPage"
 
 function App() {
   

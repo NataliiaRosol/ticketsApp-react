@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-// import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 import planeImg from "../../public/airplane.avif";
 

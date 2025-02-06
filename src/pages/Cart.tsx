@@ -1,19 +1,19 @@
-import Header from "../header/Header";
+import Header from "../components/header/Header";
 // import CartLoading from "./loading/CartLoading";
-import EmptyCart from "./EmptyCart";
-import CartTicket from "./CartTicket";
+import EmptyCart from "../components/Cart/EmptyCart";
+import CartTicket from "../components/Cart/CartTicket";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../store/store";
 
 function Cart() {
   const selectedTickets = useSelector(
     (state: RootState) => state.tickets.selectedTickets
   );
 
-  // Загальна кількість квитків
+  // Total ticket quantity
   const totalTickets = selectedTickets.length;
 
-  // Сума всіх квитків
+  // Total ticket price
   const totalPrice = selectedTickets.reduce((total, { flight }) => {
     return total + flight.price;
   }, 0);

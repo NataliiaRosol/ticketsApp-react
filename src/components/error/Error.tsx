@@ -1,5 +1,3 @@
-import "../../styles/error.css";
-
 interface ErrorProps {
   errorMessage: string;
   onRetry: () => void;

@@ -1,5 +1,4 @@
 import { CircularProgress } from "@mui/material";
-import "../../styles/loading.css";
 import React from "react";
 
 type FlightsPageLoadingProps = {
